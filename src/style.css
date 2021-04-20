@@ -1,0 +1,52 @@
+* {
+    font-family: sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    text-transform: uppercase;
+}
+#canvas {
+    display: block;
+}
+
+.container {
+    padding: 20px;
+    margin: 20px auto;
+    width: 70%;
+    border: black solid 1px;
+    border-radius: 4px;
+    box-shadow: -10px 10px 10px rgba(0,0,0,0.2);
+}
+
+.input-text {
+    height: 28px;
+    border-radius: 4px;
+}
+
+.control {
+    padding: 20px;
+}
+
+.button {
+    outline: 0;
+    color: antiquewhite;
+}
+
+.button_size_s {
+    width: 80px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.button_color_green {
+    background-color: OliveDrab;
+}
+
+.button_color_red {
+    background-color: crimson;
+}
