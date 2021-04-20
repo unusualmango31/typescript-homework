@@ -58,7 +58,7 @@ export class BinaryTree<T> {
         }
 
         if (this._maxWidth <= this.getTreeWidth()) {
-            throw new Error("Max depth is reached");
+            throw new Error("Max width is reached");
         }
 
         if ( this._root === null ) {
