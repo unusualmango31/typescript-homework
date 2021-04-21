@@ -1,3 +1,27 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var ExistError = /** @class */ (function (_super) {
+    __extends(ExistError, _super);
+    function ExistError(message) {
+        var _this = _super.call(this, message) || this;
+        _this.name = "ExistError";
+        return _this;
+    }
+    return ExistError;
+}(Error));
 var TreeNode = /** @class */ (function () {
     function TreeNode(_data, _left, _right) {
         this._data = _data;
@@ -75,17 +99,17 @@ var BinaryTree = /** @class */ (function () {
     BinaryTree.prototype.add = function (data) {
         var newNode = new TreeNode(data, null, null);
         if (this._maxDepth <= this.getTreeDepth()) {
-            throw new Error("Max depth is reached");
+            throw new RangeError("Max depth is reached");
         }
         if (this._maxWidth <= this.getTreeWidth()) {
-            throw new Error("Max depth is reached");
+            throw new RangeError("Max width is reached");
         }
         if (this._root === null) {
             this._root = newNode;
             this._size++;
         }
         else if (this.checkExistData(this._root, data) === true) {
-            throw new Error("\nData value: " + data + "\nThis data is already exist");
+            throw new ExistError("This node is already exist");
         }
         else {
             this.addNode(this._root, newNode);
@@ -119,7 +143,7 @@ var BinaryTree = /** @class */ (function () {
     // Вспомогательный метод для delete
     BinaryTree.prototype.deleteNode = function (node, data) {
         if (node === null) {
-            throw new Error("Node doesn't exist");
+            throw new ExistError("Node doesn't exist");
         }
         if (data < node.data) {
             node.left = this.deleteNode(node.left, data);
@@ -207,7 +231,7 @@ var BinaryTree = /** @class */ (function () {
     };
     BinaryTree.prototype.treeTraverse = function (callback) {
         if (this._root === null) {
-            throw new Error("Root is null");
+            throw new ExistError("Root is doesn't exist");
         }
         this.preOrderTraverse(this._root, callback);
     };
@@ -227,7 +251,7 @@ var BinaryTree = /** @class */ (function () {
     */
     BinaryTree.prototype.searchData = function (data) {
         if (this._root === null) {
-            throw new Error("Root is null");
+            throw new ExistError("Root is doesn't exist");
         }
         return this.checkExistData(this._root, data);
     };

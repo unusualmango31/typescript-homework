@@ -80,7 +80,7 @@ var BinaryTreeDrawer = /** @class */ (function () {
         if (node === null) {
             throw new Error("Node not found");
         }
-        return x / this._nodeSize * this._tree.getDepth(node);
+        return x * this._nodeSize / (this._tree.getWidth(this._tree.root, this._tree.getTreeDepth() - this._tree.getDepth(node)) * 70);
     };
     BinaryTreeDrawer.prototype.generateNewCoordY = function (y) {
         return this._nodeSize + this._tree.getTreeWidth() * this._nodeSize;

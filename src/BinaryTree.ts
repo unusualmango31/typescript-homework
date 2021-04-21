@@ -1,3 +1,10 @@
+class ExistError extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = "ExistError";
+    }
+}
+
 export class TreeNode<T> {
     constructor(private _data: T, private _left: TreeNode<T> | null, private _right: TreeNode<T> | null) {
     }
@@ -54,18 +61,18 @@ export class BinaryTree<T> {
     add(data: T): void {
         const newNode = new TreeNode(data, null, null);
         if (this._maxDepth <= this.getTreeDepth()) {
-            throw new Error("Max depth is reached");
+            throw new RangeError("Max depth is reached");
         }
 
         if (this._maxWidth <= this.getTreeWidth()) {
-            throw new Error("Max width is reached");
+            throw new RangeError("Max width is reached");
         }
 
         if ( this._root === null ) {
             this._root = newNode;
             this._size++;
         } else if (this.checkExistData(this._root, data) === true) {
-            throw new Error(`\nData value: ${data}\nThis data is already exist`);
+            throw new ExistError(`This node is already exist`);
         } else {
             this.addNode(this._root, newNode);
         }
@@ -98,7 +105,7 @@ export class BinaryTree<T> {
     // Вспомогательный метод для delete
     private deleteNode(node: TreeNode<T> | null, data: T): TreeNode<T> | null {
         if (node === null) {
-            throw new Error("Node doesn't exist");
+            throw new ExistError("Node doesn't exist");
         }
 
         if (data < node.data) {
@@ -205,7 +212,7 @@ export class BinaryTree<T> {
 
     treeTraverse(callback: Function): void {
         if (this._root === null) {
-            throw new Error("Root is null");
+            throw new ExistError("Root is doesn't exist");
         }
         this.preOrderTraverse(this._root, callback);
     }
@@ -227,7 +234,7 @@ export class BinaryTree<T> {
     */
     searchData(data: T): boolean {
         if (this._root === null) {
-            throw new Error("Root is null");
+            throw new ExistError("Root is doesn't exist");
         }
         return this.checkExistData(this._root, data);
     }
